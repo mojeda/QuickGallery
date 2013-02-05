@@ -9,6 +9,10 @@ Supports by default: png, jpg, jpeg, and gif but you are able to extend this by 
 
 ```$allowed_types = array('png','jpg','jpeg','gif');```
 
+Screenshot
+============
+![Quick Gallery](http://i.imgur.com/2uRn7t7.png)
+
 Instructions
 ============
 1. Download index.php
