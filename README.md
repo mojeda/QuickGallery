@@ -20,19 +20,19 @@ Instructions
  
 File Tree Example
 ============
-gallery
-├── index.php
-├── simcity
-│   ├── Spark_2013-03-18_15-12-33.png
-│   ├── Spark_2013-03-18_15-25-06.png
-│   ├── Spark_2013-03-18_15-25-18.png
-│   ├── Spark_2013-03-18_15-25-35.png
-│   ├── Spark_2013-03-18_15-25-50.png
-├── team fortress 2
-│   ├── 2011-02-24_00001.jpg
-│   ├── 2011-05-09_00001.jpg
-│   ├── 2011-05-09_00002.jpg
-├── thumb.php
+gallery  
+├── index.php  
+├── simcity  
+│   ├── Spark_2013-03-18_15-12-33.png  
+│   ├── Spark_2013-03-18_15-25-06.png  
+│   ├── Spark_2013-03-18_15-25-18.png  
+│   ├── Spark_2013-03-18_15-25-35.png  
+│   ├── Spark_2013-03-18_15-25-50.png  
+├── team fortress 2  
+│   ├── 2011-02-24_00001.jpg  
+│   ├── 2011-05-09_00001.jpg  
+│   ├── 2011-05-09_00002.jpg  
+├── thumb.php  
 
 
 Requirements
