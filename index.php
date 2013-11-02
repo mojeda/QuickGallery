@@ -10,7 +10,7 @@ $disable = "cache";
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.1/css/bootstrap.min.css" rel="stylesheet">
     <style>
-      html, body { background: #ebebeb; height: 100%; padding-top: 10px; }  h1 { color: #222; text-align: center; } .row-fluid { height: 100%; } .gallery img { background: #222; border-radius: 3px; padding: 10px; display: inline-block; margin: 10px; border: 1px #fff solid; }
+      html, body { background: #ebebeb; height: 100%; padding-top: 10px; } .active { background-color: #eee; border-radius: 3px; } h1 { color: #222; text-align: center; } .row-fluid { height: 100%; } .gallery img { background: #222; border-radius: 3px; padding: 10px; display: inline-block; margin: 10px; border: 1px #fff solid; }
     </style>
     <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
     <script type="text/javascript" src="//cdn.jsdelivr.net/fancybox/2.1.5/jquery.fancybox.pack.js"></script>
@@ -39,7 +39,7 @@ $disable = "cache";
               $dirs = array_filter(glob('*'), 'is_dir');
                 foreach ( $dirs as $key => $value ) {
                   if (strpos($value, $disable) === FALSE) {
-                      echo '<li><a href="'.$value.'">'.$value.'</a>';
+                      echo '<li><a href="'.$value.'" '.(($value==$gallery)?'class="active"':"").'>'.$value.'</a>';
                   }
                 }
             ?>
