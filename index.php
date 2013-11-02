@@ -14,7 +14,7 @@ $disable = "cache";
     </style>
     <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
     <script type="text/javascript" src="//cdn.jsdelivr.net/fancybox/2.1.5/jquery.fancybox.pack.js"></script>
-    <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/fancybox/2.1.5a/jquery.fancybox.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/fancybox/2.1.5/jquery.fancybox.css" media="screen" />
     <script type="text/javascript">
       $(document).ready(function() {
         $("a[rel=gallery]").fancybox({
