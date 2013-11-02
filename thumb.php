@@ -57,7 +57,7 @@ ini_set('memory_limit','64M');
 $site_config['document_root'] = $_SERVER['DOCUMENT_ROOT'];
 $thumb_size = 211; //all thumbnails are this maximum width or height if not specified via get
 $site_config['absolute_uri']=str_replace('///','//',str_replace('thumb.php?'.$_SERVER['QUERY_STRING'],'',$_SERVER['REQUEST_URI']));
-$site_config['path_thumbnail']=$site_config['absolute_uri'].'/cache/';	//where to cache thumbnails on the server, relative to the DOCUMENT_ROOT
+$site_config['path_thumbnail']=$site_config['absolute_uri'].'cache/';	//where to cache thumbnails on the server, relative to the DOCUMENT_ROOT
 $image_error=$site_config['document_root'].$site_config['absolute_uri'].'/images/icons/image_error.png';	// used if no image could be found, or a gif image is specified
 
 $thumb_size_x = 0;
