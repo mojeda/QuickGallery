@@ -17,10 +17,13 @@ Instructions
 2. Upload to a folder accessible by the internet (e.g. A folder called "gallery")
 3. Upload image albums to their own folder.
 4. Profit???
- 
+
+To enable caching, create a folder in the root of your gallery folder called "cache" and it give it 777 permissions.
+
 File Tree Example
 ============
 gallery  
+├── cache  
 ├── index.php  
 ├── simcity  
 │   ├── Spark_2013-03-18_15-12-33.png  
@@ -33,7 +36,6 @@ gallery
 │   ├── 2011-05-09_00001.jpg  
 │   ├── 2011-05-09_00002.jpg  
 ├── thumb.php  
-
 
 Requirements
 ============
