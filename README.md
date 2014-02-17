@@ -1,3 +1,7 @@
+Community
+============
+Quick Gallery now has a community forum open to everyone. https://www.pilabs.io/forum/
+
 QuickGallery
 ============
 
