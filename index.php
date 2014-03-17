@@ -1,6 +1,7 @@
 <?php
 $gallery = $_GET['gallery'];
-$disable = "cache";
+//You can now disable multiple folders from showing up in the list.
+$disable = array("cache","folder2","folder3");
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -38,8 +39,10 @@ $disable = "cache";
             <?php 
               $dirs = array_filter(glob('*'), 'is_dir');
                 foreach ( $dirs as $key => $value ) {
-                  if (strpos($value, $disable) === FALSE) {
-                      echo '<li><a href="'.$value.'" '.(($value==$gallery)?'class="active"':"").'>'.$value.'</a>';
+                  if (in_array($value, $disable)) === FALSE) {
+                    //This is not set to work if you didn't have an nginx/apache2 rewrite rule for folders
+                    //You can create a rewrite rule and modify the link accordingly below.
+                      echo '<li><a href="index.php?gallery='.$value.'" '.(($value==$gallery)?'class="active"':"").'>'.$value.'</a>';
                   }
                 }
             ?>
