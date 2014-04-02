@@ -39,7 +39,7 @@ $disable = array("cache","folder2","folder3");
             <?php 
               $dirs = array_filter(glob('*'), 'is_dir');
                 foreach ( $dirs as $key => $value ) {
-                  if (in_array($value, $disable)) === FALSE) {
+                  if (in_array($value, $disable) === FALSE) {
                     //This is not set to work if you didn't have an nginx/apache2 rewrite rule for folders
                     //You can create a rewrite rule and modify the link accordingly below.
                       echo '<li><a href="index.php?gallery='.$value.'" '.(($value==$gallery)?'class="active"':"").'>'.$value.'</a>';
