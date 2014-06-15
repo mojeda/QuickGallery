@@ -1,5 +1,7 @@
 <?php
 $gallery = $_GET['gallery'];
+// Removes all forward slashes (/) from define album to prevent path traversal.
+$gallery = str_replace(chr(47), '', $gallery);
 //You can now disable multiple folders from showing up in the list.
 $disable = array("cache","folder2","folder3");
 ?>
