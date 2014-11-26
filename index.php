@@ -55,7 +55,7 @@ $disable = array("cache","folder2","folder3");
       <div class="col-md-10 gallery">
         <?php
           $imgdir = $gallery . '/';
-          $allowed_types = array('png','jpg','jpeg','gif');
+          $allowed_types = array('png','jpg','jpeg','gif', 'mp4');
           $dimg = opendir($imgdir);
           while($imgfile = readdir($dimg))
           {

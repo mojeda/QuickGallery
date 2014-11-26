@@ -126,6 +126,17 @@ if ((file_exists($cache_file)) && (@filemtime($cache_file)>@filemtime($filename)
 	exit; # no need to create thumbnail - it already exists in the cache
 }
 
+// if it's video
+if ($fileextension == 'mp4')
+{
+	$movie = $filename;
+	$thumbnail =str_replace('//','/',$site_config['document_root'].$site_config['path_thumbnail'].md5($filename.@$thumb_size.@$thumb_size_x.@$thumb_size_y.@$quality).'.jpeg');
+
+ 	shell_exec("ffmpeg -i $movie -deinterlace -an -ss 1 -t 00:00:10 -r 1 -y -vcodec mjpeg -f mjpeg $thumbnail 2>&1");
+
+	$filename = $thumbnail;
+}
+
 # determine php and gd versions
 $ver=intval(str_replace(".","",phpversion()));
 if ($ver>=430)
@@ -140,11 +151,11 @@ if (!$image_type_arr = @getimagesize($filename))
 	if(@$_GET['noerror'])
 	{
 		exit;
-	} else {	
+	} else {
 		echo (join('', file( $site_config['document_root'].$image_error )));
 		exit;
 	}
-} 
+}
 $image_type=$image_type_arr[2];
 
 switch ($image_type)
@@ -160,7 +171,7 @@ switch ($image_type)
 				# remove the cached thumbnail
 				unlink($cache_file);
 			}
-		} 
+		}
 		break;
 
 	case 3: # PNG
@@ -168,61 +179,61 @@ switch ($image_type)
 		{
 			# not a valid png file
 			$image = imagecreatefrompng ($image_error);
-			$file_type="png";			
+			$file_type="png";
 			if (file_exists($cache_file))
 			{
 				# remove the cached thumbnail
 				unlink($cache_file);
 			}
-		}			 
+		}
 		break;
 
-	case 1: # GIF 
+	case 1: # GIF
 		if (!$image = @imagecreatefromgif ($filename))
 		{
 			# not a valid gif file
 			$image = imagecreatefrompng ($image_error);
-			$file_type="png";			
+			$file_type="png";
 			if (file_exists($cache_file))
 			{
 				# remove the cached thumbnail
 				unlink($cache_file);
 			}
-		}			 
+		}
 		break;
 	default:
-		$image = imagecreatefrompng($image_error); 
+		$image = imagecreatefrompng($image_error);
 		break;
 
 }
 
-# define size of original image	
+# define size of original image
 $image_width = imagesx($image);
 $image_height = imagesy($image);
 
-# define size of the thumbnail	
+# define size of the thumbnail
 if (@$thumb_size_x>0)
 {
 	# define images x AND y
 	$thumb_width = $thumb_size_x;
 	$factor = $image_width/$thumb_size_x;
-	$thumb_height = intval($image_height / $factor); 
+	$thumb_height = intval($image_height / $factor);
 	if ($thumb_height>$thumb_size_y)
 	{
-		$thumb_height = $thumb_size_y; 
+		$thumb_height = $thumb_size_y;
 		$factor = $image_height/$thumb_size_y;
-		$thumb_width = intval($image_width / $factor); 
-	}		
+		$thumb_width = intval($image_width / $factor);
+	}
 } else {
 	# define images x OR y
-	$thumb_width = $thumb_size; 
+	$thumb_width = $thumb_size;
 	$factor = $image_width/$thumb_size;
-	$thumb_height = intval($image_height / $factor); 
+	$thumb_height = intval($image_height / $factor);
 	if ($thumb_height>$thumb_size)
 	{
-		$thumb_height = $thumb_size; 
+		$thumb_height = $thumb_size;
 		$factor = $image_height/$thumb_size;
-		$thumb_width = intval($image_width / $factor); 
+		$thumb_width = intval($image_width / $factor);
 	}
 }
 
@@ -231,23 +242,23 @@ if ($image_width < 4000)	//no point in resampling images larger than 4000 pixels
 {
 	if (substr_count(strtolower($gd_version['GD Version']), "2.")>0)
 	{
-		//GD 2.0 
+		//GD 2.0
 		$thumbnail = ImageCreateTrueColor($thumb_width, $thumb_height);
 		imagecopyresampled($thumbnail, $image, 0, 0, 0, 0, $thumb_width, $thumb_height, $image_width, $image_height);
 	} else {
-		//GD 1.0 
+		//GD 1.0
 		$thumbnail = imagecreate($thumb_width, $thumb_height);
-		imagecopyresized($thumbnail, $image, 0, 0, 0, 0, $thumb_width, $thumb_height, $image_width, $image_height);			
-	}	
+		imagecopyresized($thumbnail, $image, 0, 0, 0, 0, $thumb_width, $thumb_height, $image_width, $image_height);
+	}
 } else {
 	if (substr_count(strtolower($gd_version['GD Version']), "2.")>0)
 	{
-		# GD 2.0 
+		# GD 2.0
 
 		$thumbnail = ImageCreateTrueColor($thumb_width, $thumb_height);
 		imagecopyresized($thumbnail, $image, 0, 0, 0, 0, $thumb_width, $thumb_height, $image_width, $image_height);
 	} else {
-		# GD 1.0 
+		# GD 1.0
 		$thumbnail = imagecreate($thumb_width, $thumb_height);
 		imagecopyresized($thumbnail, $image, 0, 0, 0, 0, $thumb_width, $thumb_height, $image_width, $image_height);
 	}
@@ -277,27 +288,29 @@ switch ($image_type)
 		header('Content-type: image/png');
 		header('Content-Disposition: inline; filename='.str_replace('/','',md5($filename.$thumb_size.$thumb_size_x.$thumb_size_y.$quality).'.png'));
 		@imagepng($thumbnail,$cache_file);
-		imagepng($thumbnail); 
+		imagepng($thumbnail);
 		break;
 
-	case 1:	# GIF 
+	case 1:	# GIF
 		if (function_exists('imagegif'))
 		{
 			header('Content-type: image/gif');
 			header('Content-Disposition: inline; filename='.str_replace('/','',md5($filename.$thumb_size.$thumb_size_x.$thumb_size_y.$quality).'.gif'));
 			@imagegif($thumbnail,$cache_file);
-			imagegif($thumbnail);  
+			imagegif($thumbnail);
 		} else {
 			header('Content-type: image/jpeg');
 			header('Content-Disposition: inline; filename='.str_replace('/','',md5($filename.$thumb_size.$thumb_size_x.$thumb_size_y.$quality).'.jpg'));
 			@imagejpeg($thumbnail,$cache_file);
-			imagejpeg($thumbnail); 
+			imagejpeg($thumbnail);
 		}
 		break;
 }
-
 //clear memory
 imagedestroy ($image);
 imagedestroy ($thumbnail);
+
+
+
 
 ?>
