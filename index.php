@@ -63,6 +63,7 @@ $disable = array("cache","folder2","folder3");
               in_array(strtolower(substr($imgfile,-4)),$allowed_types) )
             {$a_img[] = $imgfile;}
           }
+          sort($a_img);
            $totimg = count($a_img);
            for($x=0; $x < $totimg; $x++){ echo "<a href='" . $imgdir . $a_img[$x] . "' rel='gallery'><img src='thumb.php?file=$imgdir".$a_img[$x]."' /></a>"; }
         ?>
